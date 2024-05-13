@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COVID-19 Dashboard</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: linear-gradient(to bottom, #f1f2b5, #135058);
+            color: #333;
+        }
+        .container {
+            max-width: 1200px;
+            margin: auto;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        h2 {
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            border-spacing: 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        #max-min {
+            margin-bottom: 20px;
+            font-weight: bold;
+            color: #fff;
+        }
+        #mask-type {
+            margin-top: 50px;
+            font-size: 24px;
+            text-align: center;
+            color: #fff;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+        }
+        .watermark {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.7);
+            z-index: -1;
+        }
+        .watermark::before {
+            content: "COVID-19 Dashboard";
+            font-weight: bold;
+            font-style: italic;
+            opacity: 0.3;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>COVID-19 Dashboard</h1>
+
+        <h2>Cases by State</h2>
+        <div id="case_plot"></div>
+
+        <h2>Deaths by State</h2>
+        <div id="death_plot"></div>
+
+        <h2>Covid Dashboard</h2>
+        <table>
+            <caption>State-wise Overview</caption>
+            <tr>
+                <th>State</th>
+                <th>Cases</th>
+                <th>Deaths</th>
+            </tr>
+            <tr>
+                <td>California</td>
+                <td>1000</td>
+                <td>200</td>
+            </tr>
+            <tr>
+                <td>Texas</td>
+                <td>2000</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>Florida</td>
+                <td>1500</td>
+                <td>150</td>
+            </tr>
+            <tr>
+                <td>New York</td>
+                <td>1800</td>
+                <td>250</td>
+            </tr>
+            <tr>
+                <td>Illinois</td>
+                <td>1200</td>
+                <td>200</td>
+            </tr>
+        </table>
+        <div id="max-min">
+            <p>Maximum Cases: 2000 (Texas)</p>
+            <p>Minimum Cases: 1000 (California)</p>
+            <p>Maximum Deaths: 300 (Texas)</p>
+            <p>Minimum Deaths: 150 (Florida)</p>
+        </div>
+
+        <div id="mask-type">😷😷😷</div>
+
+        <h2>State-wise Distribution of Cases</h2>
+        <div id="case_pie_chart"></div>
+
+        <div class="watermark"></div>
+    </div>
+
+    <script>
+        // JavaScript code to create Plotly pie chart for cases distribution
+        var caseData = [{
+            values: [1000, 2000, 1500, 1800, 1200],
+            labels: ['California', 'Texas', 'Florida', 'New York', 'Illinois'],
+            type: 'pie'
+        }];
+        var caseLayout = {
+            title: 'Cases Distribution by State',
+            height: 400,
+            width: 500
+        };
+        Plotly.newPlot('case_pie_chart', caseData, caseLayout);
+
+        // JavaScript code to create Plotly bar chart for cases
+        var data = [{
+            x: ['California', 'Texas', 'Florida', 'New York', 'Illinois'],
+            y: [1000, 2000, 1500, 1800, 1200],
+            type: 'bar',
+            marker: {
+                color: '#007bff'
+            }
+        }];
+        var layout = {
+            title: 'Cases by State',
+            xaxis: {
+                title: 'State'
+            },
+            yaxis: {
+                title: 'Cases'
+            },
+            bargap: 0.05
+        };
+        Plotly.newPlot('case_plot', data, layout);
+
+        // JavaScript code to create Plotly bar chart for deaths
+        var data2 = [{
+            x: ['California', 'Texas', 'Florida', 'New York', 'Illinois'],
+            y: [200, 300, 150, 250, 200],
+            type: 'bar',
+            marker: {
+                color: '#ff0000'
+            }
+        }];
+        var layout2 = {
+            title: 'Deaths by State',
+            xaxis: {
+                title: 'State'
+            },
+            yaxis: {
+                title: 'Deaths'
+            },
+            bargap: 0.05
+        };
+        Plotly.newPlot('death_plot', data2, layout2);
+    </script>
+</body>
+</html>

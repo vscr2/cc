@@ -1,0 +1,29 @@
+Flask
+gunicorn
+itsdangerous
+Jinja2
+MarkupSafe
+Werkzeug
+numpy
+scipy
+scikit-learn
+matplotlib
+pandas
+nltk
+requests
+plotly
+Django
+Tornado
+SQLAlchemy
+Beautiful Soup
+TensorFlow
+PyTorch
+Keras
+FastAPI
+Dash
+Seaborn
+Statsmodels
+TensorFlow Probability
+SpaCy
+gensim
+Bokeh
